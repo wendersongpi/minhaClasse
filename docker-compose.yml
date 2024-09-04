@@ -1,0 +1,15 @@
+services:
+  javacompile:
+    build: .
+    volumes:
+      - ./src:/app/src
+      - ./bin:/app/bin
+    command: javac -d /app/bin /app/src/MinhaClasse.java
+
+  runjava:
+    build: .
+    volumes:
+      - ./bin:/app/bin
+    command: java -cp /app/bin MinhaClasse
+    depends_on:
+      - javacompile
